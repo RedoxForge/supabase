@@ -169,7 +169,7 @@ await supabase.auth.linkIdentity(OAuthProvider.google);
 </TabPanel>
 <TabPanel id="swift" label="Swift">
 
-You can use the [`linkIdentity()`](/docs/reference/swift/auth-linkidentity) method to link an oauth identity to the anonymous user.
+You can use the [`linkIdentity()`](/docs/reference/swift/auth-linkidentity) method to link an OAuth identity to the anonymous user.
 
 ```swift
 try await supabase.auth.linkIdentity(provider: .google)
@@ -195,7 +195,7 @@ An anonymous user assumes the `authenticated` role just like a permanent user. Y
 create policy "Only permanent users can post to the news feed"
 on news_feed as restrictive for insert
 to authenticated
-with check ((auth.jwt()->>'is_anonymous')::boolean is false );
+with check ((select (auth.jwt()->>'is_anonymous')::boolean) is false );
 
 create policy "Anonymous and permanent users can view the news feed"
 on news_feed for select
